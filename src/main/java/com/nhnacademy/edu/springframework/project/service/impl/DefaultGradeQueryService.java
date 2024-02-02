@@ -2,12 +2,10 @@ package com.nhnacademy.edu.springframework.project.service.impl;
 
 import com.nhnacademy.edu.springframework.project.domain.Score;
 import com.nhnacademy.edu.springframework.project.domain.Student;
-import com.nhnacademy.edu.springframework.project.repository.Students;
 import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
 import com.nhnacademy.edu.springframework.project.service.GradeQueryService;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class DefaultGradeQueryService implements GradeQueryService {

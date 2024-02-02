@@ -1,5 +1,7 @@
 package com.nhnacademy.edu.springframework.project.domain;
 
+import java.util.Objects;
+
 public class Student {
     private final int seq;
     private final String name;
@@ -29,5 +31,18 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", score=" + score +
                 '}' + '\n';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return seq == student.seq && Objects.equals(name, student.name) && Objects.equals(score, student.score);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seq, name, score);
     }
 }

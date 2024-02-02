@@ -5,9 +5,9 @@ import com.nhnacademy.edu.springframework.project.repository.Scores;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,9 @@ public class CsvScores implements Scores {
     // TODO0 5 : score.csv 파일에서 데이터를 읽어 멤버 변수에 추가하는 로직을 구현하세요.
     @Override
     public void load() {
-        try (BufferedReader br = Files.newBufferedReader(Paths.get("src/main/resources/data/score.csv"), StandardCharsets.UTF_8)) {
+        scoreList.clear();
+        try (InputStream is = CsvScores.class.getResourceAsStream("/data/score.csv");
+             BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line = "";
             while ((line = br.readLine()) != null) {
                 String[] splitString = line.split(",");
@@ -44,7 +46,6 @@ public class CsvScores implements Scores {
 
     }
 
-    //TODO0 여기도 구현해야됨
     @Override
     public List<Score> findAll() {
         return scoreList;
