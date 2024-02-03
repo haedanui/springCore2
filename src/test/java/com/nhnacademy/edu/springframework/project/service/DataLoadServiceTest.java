@@ -2,7 +2,6 @@ package com.nhnacademy.edu.springframework.project.service;
 
 import com.nhnacademy.edu.springframework.project.config.javaConfig;
 import com.nhnacademy.edu.springframework.project.domain.Student;
-import com.nhnacademy.edu.springframework.project.repository.Scores;
 import com.nhnacademy.edu.springframework.project.repository.Students;
 import com.nhnacademy.edu.springframework.project.service.impl.CsvDataLoadService;
 import org.junit.jupiter.api.Test;
