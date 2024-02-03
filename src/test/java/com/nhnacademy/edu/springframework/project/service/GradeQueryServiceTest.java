@@ -6,7 +6,6 @@ import com.nhnacademy.edu.springframework.project.repository.Students;
 import com.nhnacademy.edu.springframework.project.repository.impl.CsvScores;
 import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
 import com.nhnacademy.edu.springframework.project.service.impl.DefaultGradeQueryService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
