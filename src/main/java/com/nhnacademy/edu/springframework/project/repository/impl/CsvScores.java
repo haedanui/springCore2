@@ -15,11 +15,6 @@ public class CsvScores implements Scores {
 
     List<Score> scoreList = new ArrayList<>();
 
-    /**
-     * TODO0 2 :
-     * Java Singleton 패턴으로 getInstance() 를 구현하세요.
-     **/
-
     private static class SingletonHelper {
         private static final CsvScores INSTANCE = new CsvScores();
     }
@@ -28,7 +23,6 @@ public class CsvScores implements Scores {
         return SingletonHelper.INSTANCE;
     }
 
-    // TODO0 5 : score.csv 파일에서 데이터를 읽어 멤버 변수에 추가하는 로직을 구현하세요.
     @Override
     public void load() {
         scoreList.clear();
