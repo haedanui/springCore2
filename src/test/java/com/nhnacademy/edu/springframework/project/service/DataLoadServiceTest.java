@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DataLoadServiceTest {
 
     @Autowired
-    Scores scores;
-    @Autowired
     Students students;
     @Autowired
     CsvDataLoadService csvDataLoadService;
@@ -30,8 +28,6 @@ class DataLoadServiceTest {
     void loadAndMerge() {
 
         csvDataLoadService.loadAndMerge();
-
-        students.findAll();
 
         List<Student> studentList = (List<Student>) students.findAll();
 
