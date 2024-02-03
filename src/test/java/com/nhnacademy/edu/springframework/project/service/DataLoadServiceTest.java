@@ -1,44 +1,41 @@
 package com.nhnacademy.edu.springframework.project.service;
 
-import com.nhnacademy.edu.springframework.project.domain.Score;
+import com.nhnacademy.edu.springframework.project.config.javaConfig;
 import com.nhnacademy.edu.springframework.project.domain.Student;
 import com.nhnacademy.edu.springframework.project.repository.Scores;
 import com.nhnacademy.edu.springframework.project.repository.Students;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvScores;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
-import org.junit.jupiter.api.BeforeEach;
+import com.nhnacademy.edu.springframework.project.service.impl.CsvDataLoadService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ContextConfiguration(classes = {javaConfig.class})
+@ExtendWith(SpringExtension.class)
 class DataLoadServiceTest {
 
+    @Autowired
     Scores scores;
+    @Autowired
     Students students;
-
-    @BeforeEach
-    void setUp() {
-        students = CsvStudents.getInstance();
-        scores = CsvScores.getInstance();
-        scores.load();
-        students.load();
-    }
+    @Autowired
+    CsvDataLoadService csvDataLoadService;
 
     @Test
     void loadAndMerge() {
+
+        csvDataLoadService.loadAndMerge();
+
+        students.findAll();
+
         List<Student> studentList = (List<Student>) students.findAll();
-        List<Score> scoreList = scores.findAll();
-        for (Student student : studentList) {
-            assertNull(student.getScore());
-        }
 
-        students.merge(scoreList);
-
-        studentList = (List<Student>) students.findAll();
-
-        for (int i = 0; i < scoreList.size(); i++) {
+        for (int i = 0; i < 3; i++) {
             assertNotNull(studentList.get(i).getScore());
         }
         assertNull(studentList.get(3).getScore());

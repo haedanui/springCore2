@@ -1,32 +1,40 @@
 package com.nhnacademy.edu.springframework.project.service;
 
+import com.nhnacademy.edu.springframework.project.config.javaConfig;
 import com.nhnacademy.edu.springframework.project.domain.Student;
 import com.nhnacademy.edu.springframework.project.repository.Scores;
 import com.nhnacademy.edu.springframework.project.repository.Students;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvScores;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
 import com.nhnacademy.edu.springframework.project.service.impl.DefaultStudentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ContextConfiguration(classes = {javaConfig.class})
+@ExtendWith(SpringExtension.class)
 class StudentServiceTest {
 
+    @Autowired
     Scores scores;
+    @Autowired
+
     Students students;
+    @Autowired
+
+    DataLoadService dataLoadService;
+    @Autowired
+
     DefaultStudentService defaultStudentService;
 
     @BeforeEach
     void setUp(){
-        scores = CsvScores.getInstance();
-        students = CsvStudents.getInstance();
-        defaultStudentService = new DefaultStudentService();
-        scores.load();
-        students.load();
-        students.merge(scores.findAll());
+        dataLoadService.loadAndMerge();
     }
     @Test
     void getPassedStudents() {

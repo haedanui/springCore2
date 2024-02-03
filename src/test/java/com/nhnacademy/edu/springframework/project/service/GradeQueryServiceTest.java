@@ -1,32 +1,35 @@
 package com.nhnacademy.edu.springframework.project.service;
 
+import com.nhnacademy.edu.springframework.project.config.javaConfig;
 import com.nhnacademy.edu.springframework.project.domain.Score;
 import com.nhnacademy.edu.springframework.project.repository.Scores;
 import com.nhnacademy.edu.springframework.project.repository.Students;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvScores;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
 import com.nhnacademy.edu.springframework.project.service.impl.DefaultGradeQueryService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ContextConfiguration(classes = {javaConfig.class})
+@ExtendWith(SpringExtension.class)
 class GradeQueryServiceTest {
-
+    @Autowired
     Students students;
+    @Autowired
     Scores scores;
+    @Autowired
+    DataLoadService dataLoadService;
+    @Autowired
     DefaultGradeQueryService defaultGradeQueryService;
     @BeforeEach
     void setUp() {
-        students = CsvStudents.getInstance();
-        scores = CsvScores.getInstance();
-        defaultGradeQueryService = new DefaultGradeQueryService();
-        students.load();
-        scores.load();
-        students.merge(scores.findAll());
+        dataLoadService.loadAndMerge();
     }
 
     @Test

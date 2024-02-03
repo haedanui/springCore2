@@ -3,6 +3,7 @@ package com.nhnacademy.edu.springframework.project.repository.impl;
 import com.nhnacademy.edu.springframework.project.domain.Score;
 import com.nhnacademy.edu.springframework.project.domain.Student;
 import com.nhnacademy.edu.springframework.project.repository.Students;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,21 +15,11 @@ import java.util.Collection;
 import java.util.List;
 
 
+@Component
 public class CsvStudents implements Students {
 
     List<Student> studentList = new ArrayList<>();
 
-    /**
-     * TODO0 3 :
-     * Java Singleton 패턴으로 getInstance() 를 구현하세요.
-     **/
-    private static class SingletonHelper {
-        private static final CsvStudents INSTANCE = new CsvStudents();
-    }
-
-    public static Students getInstance() {
-        return SingletonHelper.INSTANCE;
-    }
 
     // TODO0 7 : student.csv 파일에서 데이터를 읽어 클래스 멤버 변수에 추가하는 로직을 구현하세요.
     // 데이터를 적재하고 읽기 위해서, 적절한 자료구조를 사용하세요.

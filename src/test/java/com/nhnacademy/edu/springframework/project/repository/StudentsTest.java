@@ -1,26 +1,30 @@
 package com.nhnacademy.edu.springframework.project.repository;
 
+import com.nhnacademy.edu.springframework.project.config.javaConfig;
 import com.nhnacademy.edu.springframework.project.domain.Score;
 import com.nhnacademy.edu.springframework.project.domain.Student;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvScores;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ContextConfiguration(classes = {javaConfig.class})
+@ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StudentsTest {
-
+    @Autowired
     private Students students;
+    @Autowired
     private Scores scores;
 
 
     @BeforeEach
     void setUp(){
-        students = CsvStudents.getInstance();
-        scores = CsvScores.getInstance();
         students.load();
         scores.load();
     }

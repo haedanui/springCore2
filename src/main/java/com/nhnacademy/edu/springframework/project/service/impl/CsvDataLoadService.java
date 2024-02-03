@@ -1,19 +1,26 @@
 package com.nhnacademy.edu.springframework.project.service.impl;
 
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvScores;
-import com.nhnacademy.edu.springframework.project.repository.impl.CsvStudents;
 import com.nhnacademy.edu.springframework.project.repository.Scores;
 import com.nhnacademy.edu.springframework.project.repository.Students;
 import com.nhnacademy.edu.springframework.project.service.DataLoadService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CsvDataLoadService implements DataLoadService {
+    private final Scores scores;
+    private final Students students;
+
+    @Autowired
+    public CsvDataLoadService(Scores scores, Students students){
+        this.scores = scores;
+        this.students = students;
+    }
     @Override
     public void loadAndMerge() {
-        Scores scores = CsvScores.getInstance();
         scores.load();
-
-        Students students = CsvStudents.getInstance();
         students.load();
+
         students.merge(scores.findAll());
     }
 }
